@@ -1,0 +1,190 @@
+{% load static %}
+<html>
+<head>
+    <title>Trending</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/131b541278.js"></script>
+    <link rel="stylesheet" href="{% static 'trending/css/homepage.css' %}">
+</head>
+<body>
+    <section class="secone">
+        <div class="logoandname">
+            <img class="sitelogo" src="{% static 'trending/media/trendslogomod.png' %}" width="50px" height="50px">
+            <h1>Trends|</h1>
+        </div>
+        <div class="quote">
+            <h1>Never miss world wide trending events...</h1>
+        </div>
+    </section>
+    <section class="sectwo">
+        <div class="sectwocontainer">
+            <div class="gendiv">
+                {% for i in general %}
+                    <a href="article/{{i.id}}">
+                        <div class="gentrend">
+                            <h1>{{i.header}}</h1>
+                            <div class="trendimgdiv">
+                                <img class="trendimg" src="{{i.image_link}}">
+                            </div>
+                        </div>
+                    </a>
+                {%endfor%}
+            </div>
+            <div class="sportsdiv">
+                {% for i in sports %}
+                    <a href="article/{{i.id}}">
+                        <div class="sportstrend">
+                            <h1>{{i.header}}</h1>
+                            <div class="trendimgdiv">
+                                <img class="trendimg" src="{{i.image_link}}">
+                            </div>
+                        </div>
+                    </a>
+                {%endfor%}
+            </div>
+            <div class="techdiv">
+                {%for i in technology %}
+                    <a href="article/{{i.id}}">
+                        <div class="techtrend">
+                            <h1>{{i.header}}</h1>
+                            <div class="trendimgdiv">
+                                <img class="trendimg" src="{{i.image_link}}">
+                            </div>
+                        </div>
+                    </a>
+                {%endfor%}
+            </div>
+            <div class="searchdiv">
+                {%for i in search %}
+                    <a href="article/{{i.id}}">
+                        <div class="searchtrend">
+                            <h1>{{i.header}}</h1>
+                            <div class="trendimgdiv">
+                                <img class="trendimg" src="{{i.image_link}}">
+                            </div>
+                        </div>
+                    </a>
+                {%endfor%}
+            </div>
+        </div>
+    </section>
+    <section class="secthree">
+        <img src="{% static 'trending/media/trends-banner.png' %}">
+    </section>
+    <section class="secfour">
+        <div class="socialposts">
+            {% for i in social %}
+                <a href="{{i.post_link}}">
+                    <div class="socialimgdiv">
+                        <img class="socialimg" src="{{i.image_link}}">
+                    </div>
+                </a>
+            {%endfor%}
+        </div>
+    </section>
+    <header>
+        <div class="headercontainer">
+            <ul class="socialul">
+                <li class="socialli" id="facebooklink">
+                    <a href="https://www.facebook.com/trendsWSP/"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li class="socialli" id="twitterlink">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li class="socialli" id="youtubelink">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </li>
+                <li class="socialli" id="pullbtn">
+                    <img class="pullbtnimg" src="{% static 'trending/media/previous%20button.png' %}" width="0px" height="0px" alt="logo">
+                    <script type="text/javascript">
+                        var pullbtncount = 0;
+                        $('.pullbtnimg').click(function(){
+                            if(pullbtncount%2==0){
+                                $('.socialul').css('left','55%');
+                                $('.secfour').css({'left':'55%','box-shadow':'-5px 0px 10px 2px grey'});
+                                $('.pullbtnimg').css('transform','rotate(180deg)');
+                            }
+                            else{
+                                $('.socialul').css('left','100%');
+                                $('.secfour').css({'left':'100%','box-shadow':'none'});
+                                $('.pullbtnimg').css('transform','rotate(360deg)');
+                            }
+                            pullbtncount++;
+                        });
+                    </script>
+                </li>
+            </ul>
+            <div class="navigation">
+                <ul class="navul">
+                    <li class="navli" id="general">
+                        <span>General</span>
+                    </li>
+                    <script type="text/javascript">
+                        $('#general').click(function(){
+                            $('#general').css({'border-bottom':'3px solid white','height':'47px'});
+                            $('#technology, #sports').css({'border-bottom':'none','height':'50px'});
+                            $('.sectwocontainer').css('left','0');
+                        });
+                    </script>
+                    <li class="navli" id="sports">
+                        <span>Sports</span>
+                    </li>
+                    <script type="text/javascript">
+                        $('#sports').click(function(){
+                            $('#sports').css({'border-bottom':'3px solid white','height':'47px'});
+                            $('#technology, #general').css({'border-bottom':'none','height':'50px'});
+                            $('.sectwocontainer').css('left','-100%');
+                        });
+                    </script>
+                    <li class="navli" id="technology">
+                        <span>Technology</span>
+                    </li>
+                    <script type="text/javascript">
+                        $('#technology').click(function(){
+                            $('#technology').css({'border-bottom':'3px solid white','height':'47px'});
+                            $('#general, #sports').css({'border-bottom':'none','height':'50px'});
+                            $('.sectwocontainer').css('left','-200%');
+                        });
+                    </script>
+                </ul>
+                <div class="searchbox">
+                    <input class="searchinput" type="text" placeholder="Search here..." name="search">
+                    <img class="searchbtn" src="{% static 'trending/media/search.png' %}" width="30px" height="30px">
+                    <script type="text/javascript">
+                        var searchcount = 0;
+                        $(".searchbtn").click(function(){
+                            if (searchcount%2==0){
+                                $('.navli').css('transition','none');
+                                $(".navul").css({'visibility':'hidden','width':'0px'});
+                                $('.searchbox').css({'width':'260px','border':'1px solid white'});
+                                $('.navigation').css({'top':'-5px'});
+                                $('.searchinput').css('width','230px');
+                                $('.searchbtn').attr("src","{% static 'trending/media/previous%20button.png' %}");
+                                $('.sectwocontainer').css('left','-300%');
+                            }
+                            else{
+                                $('.navli').css('transition','all 0.2s ease');
+                                $('#sports').css({'border-bottom':'none','height':'50px'});
+                                $('#general').css({'border-bottom':'none','height':'50px'});
+                                $('#politics').css({'border-bottom':'none','height':'50px'});
+                                $(".navul").css({'visibility':'visible','width':''});
+                                $('.searchbox').css({'width':'30px','border':'none'});
+                                $('.searchinput').css('width','0px');
+                                $('.navigation').css({'top':'0'});
+                                $('.searchbtn').attr("src","{% static 'trending/media/search.png' %}");
+                            }
+                            searchcount++;
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </header>
+    <footer>
+        <h2>
+            CopyRight &copy; 2019 | All rights reserved to developers.
+        </h2>
+    </footer>
+</body>
+</html>
